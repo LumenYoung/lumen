@@ -1,3 +1,5 @@
+# Lumen
+
 This is lumen, a cli project that I used for my own daily usage.
 
 There are several aspects that I want my cli app grows:
