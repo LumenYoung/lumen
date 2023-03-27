@@ -1,22 +1,21 @@
 import os
+import timeit
 
 def notify(title:str, notification:str, icon:str="arch")-> None:
     cmd = f"notify-send '{title}' '{notification}' --icon={icon}"
     os.system(cmd)
 
-def print_calendars_demo(calendars):
-    """
-    This example prints the name and URL for every calendar on the list
-    """
-    if calendars:
-        ## Some calendar servers will include all calendars you have
-        ## access to in this list, and not only the calendars owned by
-        ## this principal.
-        print("your principal has %i calendars:" % len(calendars))
-        for c in calendars:
-            print("    Name: %-36s  URL: %s" % (c.name, c.url))
-    else:
-        print("your principal has no calendars")
+
+# write a decorator to time functions
+def time_usage(func):
+    def wrapper(*args, **kwargs):
+        start = timeit.default_timer()
+        result = func(*args, **kwargs)
+        end = timeit.default_timer()
+        # print in green: Time taken
+        print(f"\033[1;32mTime usage: {end - start}\033[0m")
+        return result
+    return wrapper
 
 def main():
     notify("test", "test")
