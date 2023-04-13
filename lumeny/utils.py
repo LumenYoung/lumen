@@ -1,7 +1,10 @@
 import os
 import timeit
+from pygments.lexer import RegexLexer
+from pygments.token import Text, Comment
 
-def notify(title:str, notification:str, icon:str="arch")-> None:
+
+def notify(title: str, notification: str, icon: str = "arch") -> None:
     cmd = f"notify-send '{title}' '{notification}' --icon={icon}"
     os.system(cmd)
 
@@ -17,8 +20,20 @@ def time_usage(func):
         return result
     return wrapper
 
+
+class InputLexer(RegexLexer):
+    tokens = {
+        'root': [
+            (r'[ ^(]`(.*?)`', Comment.Preproc),
+            (r'^```(.*?$\n)?(.*?\n)+?^```$', Comment.Preproc),
+            (r'.+?', Text),
+        ]
+    }
+
+
 def main():
     notify("test", "test")
-    
+
+
 if __name__ == "__main__":
     main()

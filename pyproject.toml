@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "lumen"
-version = "0.1.0"
-description = ""
-authors = ["Tangdi <45258158+TangdizhiH@users.noreply.github.com>"]
+name = "lumeny"
+version = "0.1.1"
+description = "A cli and tui based personal management app for Lumen Young"
+authors = ["Lumen Young <pip@lumeny.io>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -17,6 +17,11 @@ openai = "^0.27.2"
 docker = "^6.0.1"
 nltk = "^3.8.1"
 pyyaml = "^6.0"
+questionary = "^1.10.0"
+prompt-toolkit = "^3.0.38"
+
+[tool.poetry.scripts]
+lumen = "lumeny.cli:cli"
 
 
 [build-system]

@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer, Static
-from MinifluxConnector import connect_miniflux, get_stared_entries, get_feed
+from MinifluxConnector import connect_miniflux 
 
 # create a widget to display all starred feed titles
 class FeedPreview(Static):

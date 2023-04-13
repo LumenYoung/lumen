@@ -2,7 +2,7 @@ import yaml
 import os
 from typing import Any
 
-CONFIG_DIR = os.path.join(os.path.expanduser("~"), ".config", "lumen")
+CONFIG_DIR = os.path.join(os.path.expanduser("~"), ".config", "lumeny")
 
 def load_config(config_dir:str = CONFIG_DIR) -> Any:
     with open(os.path.join(config_dir, "config.yml"), "r") as config_file:

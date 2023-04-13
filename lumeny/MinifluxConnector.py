@@ -1,6 +1,6 @@
 import miniflux
 from typing import Any, Dict, List
-from ConfigLoader import ConfigLoader
+from lumeny.ConfigLoader import ConfigLoader
 import random
 
 # write a function that connects to miniflux client using api key and url
