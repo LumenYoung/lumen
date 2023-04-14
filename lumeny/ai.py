@@ -11,10 +11,10 @@ openai.api_key = config["openai"]["api"]
 # Function to interact with the chatcompletion API
 
 
-def chat(conversation, model="gpt-4"):
+def chat(conversation, model="gpt-4", temperature:float =0.1):
 
     response = openai.ChatCompletion.create(
-        model=model, messages=conversation, temperature=0.1)
+        model=model, messages=conversation, temperature=temperature)
 
     return response["choices"][0]["message"]["content"]
 
