@@ -19,6 +19,7 @@ nltk = "^3.8.1"
 pyyaml = "^6.0"
 questionary = "^1.10.0"
 prompt-toolkit = "^3.0.38"
+dateparser = "^1.1.8"
 
 [tool.poetry.scripts]
 lumen = "lumeny.cli:cli"
