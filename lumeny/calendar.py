@@ -2,6 +2,7 @@
 
 from typing import Dict, List
 import datetime
+
 from lumeny.ai import chat, create_system_msg, create_user_msg
 
 
@@ -48,57 +49,74 @@ def generate_command_with_gpt4(the_instruction: str) -> str:
     return response
 
 
-def is_period_of_time(instruct: str) -> str:
+# def is_period_of_time(instruct: str) -> str:
+#     prompt_content: str = "Your task is to classify a sentence. You will receive a sentence that contains a reference to either a specific time point or a time interval. Determine if it is a time interval mentioned in the sentence, e.g. 'for 1 hour' 'for 20 mins' 'half an hour' '2 hours' are time intervals. Simply reply 'yes' or 'no' without further explanation."
+#     sys_msg = create_system_msg(prompt_content)
 
-    prompt_content: str = "Your task is to classify a sentence. You will receive a sentence that contains a reference to either a specific time point or a time interval. Determine if it is a time interval mentioned in the sentence, e.g. 'for 1 hour' 'for 20 mins' 'half an hour' '2 hours' are time intervals. Simply reply 'yes' or 'no' without further explanation."
-    sys_msg = create_system_msg(prompt_content)
+#     example_1 = [
+#         {"role": "user", "content": "Write thesis for 2 hours at 10pm"},
+#         {"role": "assistant", "content": "yes"},
+#     ]
 
-    example_1 = [
-        {"role": "user", "content": "Write thesis for 2 hours at 10pm"},
-        {"role": "assistant", "content": "yes"},
-    ]
+#     example_2 = [
+#         {"role": "user", "content": "Ride bike tomorrow at 8pm for 1 hour"},
+#         {"role": "assistant", "content": "no"},
+#     ]
 
-    example_2 = [
-        {"role": "user", "content": "Ride bike tomorrow at 8pm for 1 hour"},
-        {"role": "assistant", "content": "no"},
-    ]
+#     example_3 = [
+#         {"role": "user", "content": "2 hours writing thesis at 10 pm tomorrow"},
+#         {"role": "assistant", "content": "yes"},
+#     ]
 
-    example_3 = [
-        {"role": "user", "content": "2 hours writing thesis at 10 pm tomorrow"},
-        {"role": "assistant", "content": "yes"},
-    ]
+#     conversation: List[Dict] = [sys_msg]
 
-    conversation: List[Dict] = [sys_msg]
+#     conversation.extend(example_1)
+#     conversation.extend(example_2)
+#     conversation.extend(example_3)
 
-    conversation.extend(example_1)
-    conversation.extend(example_2)
-    conversation.extend(example_3)
+#     conversation.extend(example_3)
 
-    conversation.extend(example_3)
+#     user_message = create_user_msg(instruct)
+#     conversation.append(user_message)
 
-    user_message = create_user_msg(instruct)
-    conversation.append(user_message)
+#     response = chat(conversation, model="gpt-3.5-turbo", temperature=0)
 
-    response = chat(conversation, model="gpt-3.5-turbo", temperature=0)
-
-    return response == "yes"
+#     return response == "yes"
 
 
-def test_is_period_of_time(instructions: List, answers: List) -> None:
-    for ans, instruction in zip(answers, list_of_instructions):
-        if is_period_of_time(instruction):
-            if ans == "True":
-                print("correct, true")
-            else:
-                print("error with the instruction", instruction)
-        else:
-            if ans == "False":
-                print("correct, false")
-            else:
-                print("error with the instruction", instruction)
+# TODO add a command to extract time related information from the command
+
+
+# def extract_time_related_information(the_instruction: str) -> str:
+#     """Extract the time related information from the command.
+
+#     :param command: the command
+#     :return: the time related information
+#     """
+
+#     prompt = """
+#      TODO
+#     """
+
+#     return prompt
+
+
+# def test_is_period_of_time(instructions: List, answers: List) -> None:
+#     for ans, instruction in zip(answers, list_of_instructions):
+#         if is_period_of_time(instruction):
+#             if ans == "True":
+#                 print("correct, true")
+#             else:
+#                 print("error with the instruction", instruction)
+#         else:
+#             if ans == "False":
+#                 print("correct, false")
+#             else:
+#                 print("error with the instruction", instruction)
 
 
 if __name__ == "__main__":
+
     list_of_instructions = [
         "Ride bike tomorrow at 8pm for 1 hour",
         "Write thesis for 2 hours at 10pm",
