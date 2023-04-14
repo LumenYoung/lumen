@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lumeny"
-version = "0.1.1"
+version = "0.1.2"
 description = "A cli and tui based personal management app for Lumen Young"
 authors = ["Lumen Young <pip@lumeny.io>"]
 readme = "README.md"
