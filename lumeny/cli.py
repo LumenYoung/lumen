@@ -5,7 +5,7 @@ import click
 from prompt_toolkit.lexers import PygmentsLexer
 from lumeny.utils import InputLexer
 # from lumen.tui import launch_tui
-from lumeny.CalendarInteraction import generate_command_with_gpt4
+from lumeny.calendar import generate_command_with_gpt4
 
 
 @click.group()
