@@ -12,7 +12,7 @@ openai.api_key = config["openai"]["api"]
 # Function to interact with the chatcompletion API
 
 
-def chat(the_conversation: List[Dict], model: str = "gpt-4", temperature: float = 0.1):
+def chat_with_gpt(the_conversation: List[Dict], model: str = "gpt-4", temperature: float = 0.1):
     """
 
     The function to interact with the chatcompletion API
