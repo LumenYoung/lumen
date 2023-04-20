@@ -3,7 +3,40 @@
 from typing import Dict, List
 import datetime
 
-from lumeny.ai import chat, create_system_msg, create_user_msg
+from datetime import datetime, timedelta
+
+from lumeny.ai_utils import chat_with_gpt, create_system_msg, create_user_msg
+
+
+def repeat_learn(the_topic: str, repeat_days: List[int], start_day: int = 0) -> str:
+    """
+    the functions to create an event that follows the forgetting curves.
+    The default is to repeat at 2, 5, 14, 30 days after.
+
+    :param the_topic: What event it is
+    :param repeat_days: the scheme to repeat an tpoic
+    :param start_date int: the date you viewed/learnt this topic, relative to today. Default is 0
+    :return: the command
+    """
+
+    if repeat_days is None:
+        repeat_days = [2, 5, 14, 30]
+
+    today: datetime = datetime.today()
+
+    start_date: datetime = today - timedelta(days=start_day)
+
+    repeat_dates: List[datetime] = [
+        start_date + timedelta(days=day) for day in repeat_days
+    ]
+
+    repeat_commands: str = ""
+
+    for i, day in enumerate(repeat_dates):
+        date_str: str = day.strftime("%d.%m.%Y")
+        repeat_commands += f"khal new -a personal {date_str} {date_str} {the_topic} :: {the_topic} for the {i+1}th time ; "
+
+    return repeat_commands
 
 
 def generate_command_with_gpt4(the_instruction: str) -> str:
@@ -45,7 +78,7 @@ def generate_command_with_gpt4(the_instruction: str) -> str:
     conversation: List[Dict] = [custom_system_prompt]
     user_message = create_user_msg(the_instruction)
     conversation.append(user_message)
-    response = chat(conversation, model="gpt-4")
+    response = chat_with_gpt(conversation, model="gpt-4")
     return response
 
 
@@ -116,23 +149,24 @@ def generate_command_with_gpt4(the_instruction: str) -> str:
 
 
 if __name__ == "__main__":
+    # list_of_instructions = [
+    #     "Ride bike tomorrow at 8pm for 1 hour",
+    #     "Write thesis for 2 hours at 10pm",
+    #     "meeting with lina next wednesday at 11:30",
+    #     "Learn python for 2 hours in three weeks at 7pm",
+    #     "Go to gym at 7pm",
+    #     "Meditation at 1am",
+    #     "A one hour meeting at 7",
+    # ]
 
-    list_of_instructions = [
-        "Ride bike tomorrow at 8pm for 1 hour",
-        "Write thesis for 2 hours at 10pm",
-        "meeting with lina next wednesday at 11:30",
-        "Learn python for 2 hours in three weeks at 7pm",
-        "Go to gym at 7pm",
-        "Meditation at 1am",
-        "A one hour meeting at 7",
-    ]
+    # answers = ["True", "True", "False", "True", "False", "False", "True"]
 
-    answers = ["True", "True", "False", "True", "False", "False", "True"]
+    # for instruction in list_of_instructions:
+    #     command = generate_command_with_gpt4(instruction)
 
-    for instruction in list_of_instructions:
-        command = generate_command_with_gpt4(instruction)
+    #     print(command)
 
-        print(command)
+    repeat_learn("Learn the MMK chapter 1")
 
     # print(generate_command_with_gpt4( "Learn python for 2 hours in three weeks at 7pm"))
     # print(generate_command_with_gpt4("meeting with lina next wednesday at 11:30"))
