@@ -1,11 +1,13 @@
-import miniflux
 from typing import Any, Dict, List
-from lumeny.ConfigLoader import ConfigLoader
+from config_loader import ConfigLoader
 import random
+import miniflux
+
 
 # write a function that connects to miniflux client using api key and url
 def connect_miniflux(url: str, api_key: str) -> miniflux.Client:
     return miniflux.Client(url, api_key=api_key)
+
 
 # a function that prints all the feeds' name and id
 def print_feeds(feeds: List[Dict]) -> None:
@@ -17,29 +19,34 @@ def print_feeds(feeds: List[Dict]) -> None:
         print(f"Feed id: {feed['id']}, Feed name: {feed['title']}")
         # print such that title ,id and site_url are aligned
 
+
 # write a function that get all the entries from a feed, optionally select by starred or unread, and return a list of entry id
 def get_entries_from_feed(
     client: miniflux.Client, feed_id: int, starred: bool = False, unread: bool = False
 ) -> List[int]:
     # get entries from feed
-    entries: Dict = client.get_entries(feed_id= feed_id, starred=starred, unread=unread)
-    
+    entries: Dict = client.get_entries(feed_id=feed_id, starred=starred, unread=unread)
+
     # since the entries are cut if the number is above 100, we need to fetch the entries again with limit from total
     total: int = entries["total"]
-    entries: List[Dict] = client.get_entries(feed_id = feed_id, starred=starred, unread=unread, limit=total)
+    entries: List[Dict] = client.get_entries(
+        feed_id=feed_id, starred=starred, unread=unread, limit=total
+    )
     # assert that the total is equal to the length of entries
     assert total == len(entries["entries"])
-    
+
     # print type of total
     print(f"Total type: {type(total)}")
-    
+
     # get only entry id
-    entry_ids: List[int] = [entry["id"] for entry in entries['entries']]
+    entry_ids: List[int] = [entry["id"] for entry in entries["entries"]]
     return entry_ids
+
 
 # write a function to find feed by its id, use map instead of for loop
 def find_feed_by_id(feed_id: int, feeds: List[Dict]) -> Dict:
     return next(filter(lambda feed: feed["id"] == feed_id, feeds))
+
 
 # TODO create embedding from feed content
 
@@ -49,8 +56,8 @@ def find_feed_by_id(feed_id: int, feeds: List[Dict]) -> Dict:
 
 # TODO randomly select n feeds from all started feeds
 
+
 def test():
-    
     # connect
     config_loader = ConfigLoader()
     config = config_loader.get_config()
@@ -63,7 +70,7 @@ def test():
     feeds: List[Dict] = client.get_feeds()
     # get only id
     feed_ids: List[int] = [feed["id"] for feed in feeds]
-    
+
     print("feed ids are as follows: ")
     print(feed_ids)
 
@@ -74,13 +81,12 @@ def test():
     # get feed by id
     feed: Dict = find_feed_by_id(feed_id, feeds)
     print(f"feed with id {feed_id} is: {feed['title']}")
-    
+
     # get entries from feed
     entries = get_entries_from_feed(client, feed_id)
-    
+
     # print total number of entries
     print(f"Total number of entries: {len(entries)}")
-    
 
 
 if __name__ == "__main__":

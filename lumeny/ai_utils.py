@@ -2,12 +2,12 @@
 
 from typing import Dict, List
 import openai
-from lumeny.ConfigLoader import ConfigLoader
+# from lumeny.ConfigLoader import ConfigLoader
 
 # Set your API key from environment variables
-config = ConfigLoader().get_config()
+# config = ConfigLoader().get_config()
 
-openai.api_key = config["openai"]["api"]
+# openai.api_key = config["openai"]["api"]
 
 # Function to interact with the chatcompletion API
 

@@ -1,7 +1,7 @@
 import caldav
 import timeit
 from typing import List
-from ConfigLoader import ConfigLoader
+from config_loader import ConfigLoader
 from utils import time_usage
 import datetime
 import random

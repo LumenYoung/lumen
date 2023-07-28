@@ -4,12 +4,6 @@ from pygments.lexer import RegexLexer
 from pygments.token import Text, Comment
 
 
-def print_green(text):
-    green_escape = "\033[32m"
-    reset_escape = "\033[0m"
-    print(f"{green_escape}{text}{reset_escape}")
-
-
 def notify(title: str, notification: str, icon: str = "arch") -> None:
     cmd = f"notify-send '{title}' '{notification}' --icon={icon}"
     os.system(cmd)
