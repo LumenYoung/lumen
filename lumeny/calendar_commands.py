@@ -5,7 +5,7 @@ import datetime
 
 from datetime import datetime, timedelta
 
-from ai_utils import chat_with_gpt, create_system_msg, create_user_msg
+from utils import chat_with_gpt, create_system_msg, create_user_msg
 
 
 def repeat_learn(the_topic: str, repeat_days: List[int], start_day: int = 0) -> str:
