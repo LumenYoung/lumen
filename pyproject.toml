@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lumeny"
-version = "0.2.0"
+version = "0.3.0"
 description = "A cli and tui based personal management app for Lumen Young"
 authors = ["Lumen Young <pip@lumeny.io>"]
 readme = "README.md"
@@ -21,6 +21,7 @@ questionary = "^1.10.0"
 prompt-toolkit = "^3.0.38"
 dateparser = "^1.1.8"
 termcolor = "^2.3.0"
+langchain = "^0.0.252"
 
 [tool.poetry.scripts]
 lumen = "lumeny.cli:cli"

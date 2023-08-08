@@ -3,11 +3,11 @@ import os
 import questionary as q
 import click
 from prompt_toolkit.lexers import PygmentsLexer
-from lumeny.utils import InputLexer
+from utils import InputLexer
 
 # from lumen.tui import launch_tui
 # from lumeny.calendar import generate_command_with_gpt4, repeat_learn
-from lumeny.task_picker import random_task_picker, available_sections
+from task_picker import random_task_picker, available_sections
 from termcolor import colored
 
 
